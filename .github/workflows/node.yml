@@ -2,6 +2,12 @@ name: Node.js CI
 
 on:
   workflow_call:
+    inputs:
+      lint:
+        required: false
+        type: boolean
+        default: true
+
 
 jobs:
   node_ci:
@@ -27,6 +33,7 @@ jobs:
       - name: Build
         run: npm run build
       - name: Lint
+        if: ${{ inputs.lint }}
         run: npm run lint
       - name: Run tests
         run: npm run test
